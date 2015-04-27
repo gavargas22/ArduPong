@@ -1,11 +1,14 @@
 package
 {
 	import flash.display.Stage;
+	import flash.text.TextField;
+	import flash.text.TextFieldType;
+	import flash.display.*;
 
 	public class PongComponents extends Pong
 	{
-		public function PongComponents()
-		{
+//		public function PongComponents()
+//		{
 			import flash.display.Shape;
 			
 			// Create the components of the game interface.
@@ -19,7 +22,6 @@ package
 			playerOnePaddle.graphics.endFill(); // not always needed but I like to put it in to end the fill
 			playground.addChild(playerOnePaddle); // adds the rectangle to the stage
 			
-			return
 			
 			// Player two's paddle
 //			var playerTwoPaddle:Shape = new Shape; // initializing the variable named rectangle
@@ -30,6 +32,5 @@ package
 //			
 //			playerScoreText.text = ("Player Score: " + playerScore);
 //			cpuScoreText.text = ("CPU Score: " + cpuScore);
-		}
-	}
+//	}
 }
