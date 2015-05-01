@@ -32,8 +32,8 @@ package
 			var stageHeight:int = stage.stageHeight;
 			// Other variables
 			var ballSpeedX:int = -3;
-			var ballSpeedY:int = -2;
-			var cpuPaddleSpeed:int = 3;
+			var ballSpeedY:int = 9;
+			var cpuPaddleSpeed:int = 9;
 			var playerScore:int = 0;
 			var cpuScore:int = 0;
 			
@@ -55,7 +55,7 @@ package
 			// Ball
 			var ball:Shape = new Shape; // initializing the variable named rectangle
 			ball.graphics.beginFill(0x000000); // choosing the colour for the fill, here it is red
-			ball.graphics.drawCircle(0,0,5);
+			ball.graphics.drawCircle(0,0,20);
 			ball.graphics.endFill(); // not always needed but I like to put it in to end the fill
 			stage.addChild(ball); // adds the rectangle to the stage
 			
@@ -89,7 +89,8 @@ package
 				}
 				
 				
-				playerOnePaddle.y = mouseY;
+//				playerOnePaddle.y = mouseY;
+				playerOnePaddle.y = distanceNumberForMouse*4;
 				
 				//check if top of paddle is above top of screen
 				if(playerOnePaddle.y - playerOnePaddle.height/2 < 0){ 
@@ -140,7 +141,7 @@ package
 			// Create a new Arduino class object. 
 			arduino = new ArduinoConnector();
 			// Select the COM port that we the Arduino is connected to.
-			arduino.connect("COM8", 9600);
+			arduino.connect("COM8", 115200);
 			arduino.addEventListener("socketData", getDistanceFromArdy);
 		}
 		// After application is closed, close the COM Port as well.
@@ -159,12 +160,16 @@ package
 		}
 		
 		// This function gets the distance that is spit out by the Arduino in Centimeters.
-		private function getDistanceFromArdy(aEvt: ArduinoConnectorEvent): String {
-			var distanceValue:String;
-			distanceValue = arduino.readBytesAsString();
-			trace(arduino.readBytesAsString());
-			return distanceValue;
+		
+		public var distanceNumberForMouse:Number;
+		
+		public function getDistanceFromArdy(evt:ArduinoConnectorEvent):Number {
+			var distanceString:String = arduino.readBytesAsString();
+			var distanceNumber:Number = Number(distanceString);
+			distanceNumberForMouse = distanceNumber;
+			trace(distanceNumber);
+			return(distanceNumber);
 		}
 		
-	}
+	}	
 }
